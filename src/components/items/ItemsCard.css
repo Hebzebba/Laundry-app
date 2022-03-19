@@ -1,0 +1,35 @@
+@import url("../../index.css");
+
+.item-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  width: 15rem;
+  color: #256257;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.item-title {
+  font-weight: bold;
+}
+.item-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item-btn,
+.item-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.item-btn > button {
+  width: 150px;
+  height: 40px;
+  border-radius: 30px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: var(--btn-color);
+}
