@@ -1,23 +1,100 @@
 .header-container {
-  width: 100%;
+  width: 100vw;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
+
 .header-sub-container {
   width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .brand {
   width: 150px;
 }
+.nav {
+  width: 30%;
+}
+.nav ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .nav ul li {
+  padding: 10px 10px;
   list-style-type: none;
-  display: inline-block;
-  padding: 20px;
-  color: white;
-  font-size: 15px;
+}
+
+.header-btn-group {
+  width: 15%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.login-btn,
+.sign-up-btn {
+  cursor: pointer;
   font-weight: bold;
+}
+
+.menu-icon {
+  cursor: pointer;
+  display: none;
+}
+
+.menu-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 0;
+  overflow-x: hidden;
+  background-color: black;
+  z-index: 100;
+  transition: 0.8s;
+}
+.menu-nav-link {
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.close-btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding: 5px 10px;
+}
+.close-btn {
+  color: white;
+  cursor: pointer;
+}
+.nav-links {
+  text-align: center;
+  width: 100%;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 15px 0;
+  border-bottom: 2px solid gray;
+}
+
+@media (max-width: 768px) {
+  .header-sub-container {
+    padding: 10px;
+  }
+  .nav {
+    display: none;
+  }
+  .header-btn-group {
+    display: none;
+  }
+  .menu-icon {
+    display: block;
+  }
 }

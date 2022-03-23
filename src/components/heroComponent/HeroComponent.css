@@ -1,0 +1,40 @@
+.hero-container {
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../../public/img/washing_bg.jpg");
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+}
+
+.hero-header {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.hero-btn {
+  width: 25%;
+  margin-top: 20px;
+  padding: 10px 0;
+  border-radius: 30px;
+  background-color: #f02d2d;
+  cursor: pointer;
+}
+.hero-btn:hover {
+  background-color: rgb(163, 163, 163);
+  transition: 0.2s ease-in;
+}
