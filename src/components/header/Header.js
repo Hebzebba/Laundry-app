@@ -16,23 +16,59 @@ const Header = () => {
           <CloseOutlined className="close-btn" onClick={closeNav} />
         </div>
         <div className="menu-nav-link">
-          <div className="nav-links">Home</div>
-          <div className="nav-links">Laundrys</div>
-          <div className="nav-links">About</div>
-          <div className="nav-links">Contact</div>
+          <div className="nav-links">
+            <Link to="/" style={{ color: "#fff" }}>
+              Home
+            </Link>
+          </div>
+
+          <div className="nav-links">
+            {" "}
+            <Link to="/laundry" style={{ color: "#fff" }}>
+              Laundrys
+            </Link>
+          </div>
+          <div className="nav-links">
+            {" "}
+            <Link to="/about" style={{ color: "#fff" }}>
+              About
+            </Link>
+          </div>
+          <div className="nav-links">
+            {" "}
+            <Link to="/contact" style={{ color: "#fff" }}>
+              Contact
+            </Link>
+          </div>
+
+          <div className="nav-links">
+            {" "}
+            <Link to="/sign-up" style={{ color: "#fff" }}>
+              Sign-up
+            </Link>
+          </div>
+
+          <div className="nav-links">
+            {" "}
+            <Link to="/login" style={{ color: "#fff" }}>
+              Login
+            </Link>
+          </div>
         </div>
       </div>
       <div className="header-container">
         <div className="header-sub-container">
-          <div className="brand">
-            <img src="../../../img/brand.png" alt="" width="100%" />
-          </div>
+          <Link to="/">
+            <div className="brand">
+              <img src="../../../img/brand.png" alt="" width="100%" />
+            </div>
+          </Link>
           <div className="nav">
             <ul>
               <Link to="/">Home</Link>
               <Link to="/laundry">Laundry</Link>
-              <li>About</li>
-              <li>Contact</li>
+              <Link to="/about">About</Link>
+              <Link to="/contact">Contact</Link>
             </ul>
           </div>
 

@@ -3,6 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header-sub-container {
@@ -23,9 +24,11 @@
   align-items: center;
 }
 
-.nav ul li {
+.nav ul a {
   padding: 10px 10px;
   list-style-type: none;
+  color: black;
+  font-size: 20px;
 }
 
 .header-btn-group {
@@ -83,7 +86,6 @@
   padding: 15px 0;
   border-bottom: 2px solid gray;
 }
-
 @media (max-width: 768px) {
   .header-sub-container {
     padding: 10px;
