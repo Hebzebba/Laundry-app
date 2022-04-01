@@ -12,12 +12,12 @@ export const countertReducer = (state = 0, actiion) => {
   }
 };
 
-const auth = (state = false, action) => {
+const auth = (authState = false, action) => {
   switch (action.type) {
-    case "LOGGEDIN":
-      return (state = true);
+    case "LOGIN":
+      return (authState = true);
     default:
-      return state;
+      return authState;
   }
 };
 

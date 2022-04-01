@@ -22,6 +22,7 @@ const MapBox = () => {
             longitude={data.longitude}
             latitude={data.latitude}
             anchor="bottom"
+            onClick={() => console.log(`Hello there ${data.longitude}`)}
           >
             <AddLocation />
           </Marker>

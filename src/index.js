@@ -8,14 +8,13 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import { allReducers } from "./reducer/reducer";
 
+// store.dispatch({ type: "INCREMENT" });
+// store.dispatch({ type: "INCREMENT" });
+// store.dispatch({ type: "INCREMENT" })
 let store = createStore(
   allReducers,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
-
-// store.dispatch({ type: "INCREMENT" });
-// store.dispatch({ type: "INCREMENT" });
-// store.dispatch({ type: "INCREMENT" });
 
 ReactDOM.render(
   <Provider store={store}>

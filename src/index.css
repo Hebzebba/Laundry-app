@@ -3,5 +3,5 @@
   --btn-color: linear-gradient(0deg, #a3bded 0%, #6991c7 100%);
 }
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
