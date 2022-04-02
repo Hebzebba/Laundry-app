@@ -1,17 +1,17 @@
+import { useRef } from "react";
 import { CloseOutlined, MenuOutlined } from "@material-ui/icons";
 import "./Header.css";
 import { Link } from "react-router-dom";
-
-let name = "black";
-
-const openNav = () =>
-  (document.querySelector(".menu-nav").style = "width: 30vw");
-const closeNav = () => (document.querySelector(".menu-nav").style = "width: 0");
+import { useSelector } from "react-redux";
 
 const Header = () => {
+  const authStatus = useSelector((state) => state.auth);
+  const toggleNavRef = useRef(null);
+  const openNav = () => (toggleNavRef.current.style.width = "200px");
+  const closeNav = () => (toggleNavRef.current.style.width = 0);
   return (
     <div>
-      <div className="menu-nav">
+      <div className="menu-nav" ref={toggleNavRef}>
         <div className="close-btn-container">
           <CloseOutlined className="close-btn" onClick={closeNav} />
         </div>
@@ -56,6 +56,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+
       <div className="header-container">
         <div className="header-sub-container">
           <Link to="/">
@@ -72,10 +73,18 @@ const Header = () => {
             </ul>
           </div>
 
-          <div className="header-btn-group">
-            <div className="login-btn">Login</div>
-            <div className="sign-up-btn">Sign-up</div>
-          </div>
+          {authStatus ? (
+            <>Logout</>
+          ) : (
+            <div className="header-btn-group">
+              <Link to="/login">
+                <div className="login-btn">Login</div>
+              </Link>
+              <Link to="sign-up">
+                <div className="sign-up-btn">Sign-up</div>
+              </Link>
+            </div>
+          )}
           <div className="menu-icon">
             <MenuOutlined onClick={openNav} />
           </div>

@@ -1,20 +1,10 @@
-import React from "react";
-import { combineReducers } from "redux";
+import * as ActionTypes from "../actions/ActionState";
 
-export const countertReducer = (state = 0, actiion) => {
-  switch (actiion.type) {
-    case "INCREMENT":
-      return state + 1;
-    case "DECREMENT":
-      return state - 1;
-    default:
-      return state;
-  }
-};
+import { combineReducers } from "redux";
 
 const auth = (authState = false, action) => {
   switch (action.type) {
-    case "LOGIN":
+    case ActionTypes.LOGIN:
       return (authState = true);
     default:
       return authState;
@@ -22,6 +12,5 @@ const auth = (authState = false, action) => {
 };
 
 export const allReducers = combineReducers({
-  countertReducer,
   auth,
 });
