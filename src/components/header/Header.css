@@ -41,6 +41,10 @@
 
 .login-btn,
 .sign-up-btn {
+  width: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
   font-weight: bold;
 }
@@ -88,6 +92,19 @@
   padding: 15px 0;
   border-bottom: 2px solid gray;
 }
+.nav-link-logout{
+
+  display: flex;
+  justify-content:center;
+  align-items: center;
+}
+.logout-btn{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  width: 70px;
+}
 @media (max-width: 768px) {
   .header-sub-container {
     padding: 10px;
@@ -100,5 +117,8 @@
   }
   .menu-icon {
     display: block;
+  }
+  .logout-btn{
+    display: none;
   }
 }

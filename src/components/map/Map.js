@@ -1,5 +1,5 @@
 import "./Map.css";
-import { AddLocation, LocalAirport } from "@material-ui/icons";
+import { IoLocationSharp } from "react-icons/io5";
 import Map, { Marker } from "react-map-gl";
 
 import "./Map.css";
@@ -11,10 +11,10 @@ const MapBox = () => {
   const navigate = useNavigate();
 
   const viewAndMakeOrder = () => {
-    if (authStatus) {
-      navigate("/details");
+    if (authStatus || localStorage.getItem("loginStat")) {
+      navigate("/details", { replace: true });
     } else {
-      navigate("/login");
+      navigate("/login", { replace: true });
     }
   };
   return (
@@ -29,7 +29,6 @@ const MapBox = () => {
           width: "100vw",
           height: "80vh",
           color: "red",
-          cursor: "pointer",
         }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken="pk.eyJ1Ijoic2V0aGdyZWdvcnkiLCJhIjoiY2wweHZ0d29uMGp0ZzNtc2R5bGFidHVoeCJ9.YT86gZa8hPmJ_XaC44qpNQ"
@@ -42,7 +41,7 @@ const MapBox = () => {
             anchor="bottom"
             onClick={viewAndMakeOrder}
           >
-            <AddLocation />
+            <IoLocationSharp style={{ cursor: "pointer" }} size={25} />
           </Marker>
         ))}
       </Map>

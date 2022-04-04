@@ -11,6 +11,18 @@ const auth = (authState = false, action) => {
   }
 };
 
+const loadingReducer = (state = false, { type }) => {
+  switch (type) {
+    case ActionTypes.LOADING:
+      return (state = true);
+    case ActionTypes.END_LOADING:
+      return (state = false);
+    default:
+      return state;
+  }
+};
+
 export const allReducers = combineReducers({
   auth,
+  loadingReducer,
 });

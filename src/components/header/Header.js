@@ -1,19 +1,36 @@
 import { useRef } from "react";
-import { CloseOutlined, MenuOutlined } from "@material-ui/icons";
 import "./Header.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  IoLogOutOutline,
+  IoLogInOutline,
+  IoPersonSharp,
+  IoCloseCircleSharp,
+  IoMenu,
+} from "react-icons/io5";
 
 const Header = () => {
   const authStatus = useSelector((state) => state.auth);
   const toggleNavRef = useRef(null);
   const openNav = () => (toggleNavRef.current.style.width = "200px");
   const closeNav = () => (toggleNavRef.current.style.width = 0);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+    window.location.reload(true);
+  };
   return (
     <div>
       <div className="menu-nav" ref={toggleNavRef}>
         <div className="close-btn-container">
-          <CloseOutlined className="close-btn" onClick={closeNav} />
+          <IoCloseCircleSharp
+            className="close-btn"
+            onClick={closeNav}
+            size={24}
+          />
         </div>
         <div className="menu-nav-link">
           <div className="nav-links">
@@ -40,20 +57,27 @@ const Header = () => {
               Contact
             </Link>
           </div>
+          {authStatus || localStorage.getItem("loginStat") ? (
+            <div className="nav-links nav-link-logout" onClick={handleLogout}>
+              Logout <IoLogOutOutline />
+            </div>
+          ) : (
+            <>
+              <div className="nav-links">
+                {" "}
+                <Link to="/sign-up" style={{ color: "#fff" }}>
+                  Sign-up
+                </Link>
+              </div>
 
-          <div className="nav-links">
-            {" "}
-            <Link to="/sign-up" style={{ color: "#fff" }}>
-              Sign-up
-            </Link>
-          </div>
-
-          <div className="nav-links">
-            {" "}
-            <Link to="/login" style={{ color: "#fff" }}>
-              Login
-            </Link>
-          </div>
+              <div className="nav-links">
+                {" "}
+                <Link to="/login" style={{ color: "#fff" }}>
+                  Login
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
@@ -73,20 +97,26 @@ const Header = () => {
             </ul>
           </div>
 
-          {authStatus ? (
-            <>Logout</>
+          {authStatus || localStorage.getItem("loginStat") ? (
+            <div className="logout-btn" onClick={handleLogout}>
+              Logout <IoLogOutOutline />
+            </div>
           ) : (
             <div className="header-btn-group">
               <Link to="/login">
-                <div className="login-btn">Login</div>
+                <div className="login-btn">
+                  Login <IoLogInOutline />
+                </div>
               </Link>
               <Link to="sign-up">
-                <div className="sign-up-btn">Sign-up</div>
+                <div className="sign-up-btn">
+                  Sign-up <IoPersonSharp />
+                </div>
               </Link>
             </div>
           )}
           <div className="menu-icon">
-            <MenuOutlined onClick={openNav} />
+            <IoMenu onClick={openNav} size={24} />
           </div>
         </div>
       </div>

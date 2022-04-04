@@ -5,15 +5,19 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import { allReducers } from "./reducer/reducer";
+import thunk from "redux-thunk";
 
-// store.dispatch({ type: "INCREMENT" });
-// store.dispatch({ type: "INCREMENT" });
-// store.dispatch({ type: "INCREMENT" })
+let initialState = {};
+const composeEnhancers =
+  (typeof window !== "undefined" &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
 let store = createStore(
   allReducers,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  initialState,
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 ReactDOM.render(

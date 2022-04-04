@@ -1,4 +1,4 @@
-import { AddLocation, Phone } from "@material-ui/icons";
+import { IoLocationSharp, IoCallSharp } from "react-icons/io5";
 import "./Contact.css";
 const Contact = () => {
   return (
@@ -14,19 +14,19 @@ const Contact = () => {
             Folding Bulk Cleaning
           </p>
           <span>
-            <Phone />
+            <IoCallSharp />
             <small>0555214049</small> || <small>0543726905</small> ||{" "}
             <small>0556131652</small>
           </span>
           <p>
             {" "}
-            <AddLocation />
+            <IoLocationSharp />
             Koforidua Technical University
           </p>
 
           <p>
             {" "}
-            <AddLocation />
+            <IoLocationSharp />
             Koforidua All Nations University
           </p>
         </div>
