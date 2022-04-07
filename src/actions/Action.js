@@ -1,7 +1,10 @@
 import axios from "axios";
 import * as ActionTypes from "./ActionState";
 
-const BASE_URL = "http://localhost:8080/api";
+// Dev
+// const BASE_URL = "http://localhost:8080/api";
+// Prod
+const BASE_URL = "https://labmass.herokuapp.com/api";
 
 export const loading = () => ({
   type: ActionTypes.LOADING,
