@@ -22,7 +22,19 @@ const loadingReducer = (state = false, { type }) => {
   }
 };
 
+const userInfoReducer = (
+  state = { fullName: "", email: "", contact: "" },
+  { type, payload }
+) => {
+  switch (type) {
+    case ActionTypes.FETCH_USER_DATA:
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};
 export const allReducers = combineReducers({
   auth,
   loadingReducer,
+  userInfoReducer,
 });

@@ -1,7 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { login, loading, end_loading, loginStat } from "../../actions/Action";
+import {
+  login,
+  loading,
+  end_loading,
+  loginStat,
+  userData,
+} from "../../actions/Action";
 import "./Login.css";
 import { useAlert } from "react-alert";
 
@@ -35,14 +41,23 @@ const Login = () => {
     e.preventDefault();
     dispatch(loading());
     const status = await login(user, pass);
-    if (status) {
-      dispatch(end_loading());
-      if (status === "No record found" || status === "Authentication failed") {
-        alert.error("User not found or invalid account");
-      } else {
-        dispatch(loginStat());
-        localStorage.setItem("loginStat", status);
+    try {
+      if (status) {
+        dispatch(end_loading());
+        if (
+          status === "No record found" ||
+          status === "Authentication failed"
+        ) {
+          alert.error("User not found or invalid account");
+        } else if (status[0] === "Authentication passed") {
+          dispatch(loginStat());
+          localStorage.setItem("loginStat", true);
+          localStorage.setItem("email", status[1]);
+          await userData(status[1]);
+        }
       }
+    } catch (err) {
+      console.log(err);
     }
   };
 

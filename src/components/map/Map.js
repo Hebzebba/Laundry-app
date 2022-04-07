@@ -11,7 +11,10 @@ const MapBox = () => {
   const navigate = useNavigate();
 
   const viewAndMakeOrder = () => {
-    if (authStatus || localStorage.getItem("loginStat")) {
+    if (
+      authStatus ||
+      (localStorage.getItem("loginStat") && localStorage.getItem("email"))
+    ) {
       navigate("/details", { replace: true });
     } else {
       navigate("/login", { replace: true });

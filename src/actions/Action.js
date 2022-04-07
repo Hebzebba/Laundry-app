@@ -15,9 +15,14 @@ export const loginStat = () => ({
   type: ActionTypes.LOGIN,
 });
 
-export const login = (contact, password) => {
+export const getUserInfo = (payload) => ({
+  type: ActionTypes.FETCH_USER_DATA,
+  payload,
+});
+
+export const login = (email, password) => {
   return axios
-    .post(`${BASE_URL}/login`, { contact, password })
+    .post(`${BASE_URL}/user/login`, { email, password })
     .then((res) => res.data)
     .catch((err) => err);
 };
@@ -31,10 +36,39 @@ export const register = (
 ) => {
   if (password === confirm_password) {
     return axios
-      .post(`${BASE_URL}/register`, { fullName, email, contact, password })
+      .post(`${BASE_URL}/user/register`, { fullName, email, contact, password })
       .then((res) => res.data)
       .catch((err) => err);
   } else {
     return "password mistach";
   }
+};
+
+export const userData = (user_id) => {
+  return axios
+    .get(`${BASE_URL}/user/info?user_id=${user_id}`)
+    .then(({ data }) => {
+      localStorage.setItem("user_name", data.fullName);
+      localStorage.setItem("contact", data.contact);
+    })
+    .catch((err) => err);
+};
+
+export const createOrder = (
+  email,
+  user_name,
+  laundryType,
+  telephoneNumber,
+  date
+) => {
+  return axios
+    .post(`${BASE_URL}/order`, {
+      email,
+      user_name,
+      laundryType,
+      telephoneNumber,
+      date,
+    })
+    .then((res) => res.data)
+    .catch((err) => err);
 };

@@ -6,6 +6,8 @@ import { register, loading, end_loading } from "../../actions/Action";
 import { css } from "@emotion/react";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useAlert } from "react-alert";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const override = css`
   display: block;
@@ -19,7 +21,7 @@ const SignUp = () => {
 
   const [fName, setFname] = useState("");
   const [email, setEmail] = useState("");
-  const [contact, setContact] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -28,13 +30,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     dispatch(loading());
-    const data = await register(
-      fName,
-      email,
-      contact,
-      password,
-      confirmPassword
-    );
+    const data = await register(fName, email, phone, password, confirmPassword);
 
     if (data[0] === "User added") {
       dispatch(end_loading());
@@ -76,11 +72,13 @@ const SignUp = () => {
           <div className="form-group">
             <label htmlFor="contact">Contact</label>
             <div className="input-form">
-              <input
-                type="text"
-                id="contact"
-                required={true}
-                onChange={(e) => setContact(e.target.value)}
+              <PhoneInput
+                countryCodeEditable={false}
+                country="gh"
+                value={phone}
+                inputStyle={{ width: "100%" }}
+                containerStyle={{ width: "100%" }}
+                onChange={(number) => setPhone(number)}
               />
             </div>
           </div>
