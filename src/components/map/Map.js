@@ -5,16 +5,21 @@ import Map, { Marker } from "react-map-gl";
 import "./Map.css";
 import { map_cordinate } from "./map_data";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getCordinate } from "../../actions/Action";
 const MapBox = () => {
   const authStatus = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const viewAndMakeOrder = () => {
+  const viewAndMakeOrder = (longitude, latitude) => {
     if (
       authStatus ||
       (localStorage.getItem("loginStat") && localStorage.getItem("email"))
     ) {
+      localStorage.setItem("long", longitude);
+      localStorage.setItem("lat", latitude);
+      dispatch(getCordinate({ longitude, latitude }));
       navigate("/details", { replace: true });
     } else {
       navigate("/login", { replace: true });
@@ -42,7 +47,7 @@ const MapBox = () => {
             longitude={data.longitude}
             latitude={data.latitude}
             anchor="bottom"
-            onClick={viewAndMakeOrder}
+            onClick={() => viewAndMakeOrder(data.longitude, data.latitude)}
           >
             <IoLocationSharp style={{ cursor: "pointer" }} size={25} />
           </Marker>

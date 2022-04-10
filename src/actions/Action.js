@@ -23,6 +23,11 @@ export const getUserInfo = (payload) => ({
   payload,
 });
 
+export const getCordinate = (payload) => ({
+  type: ActionTypes.CORDINATE,
+  payload,
+});
+
 export const login = (email, password) => {
   return axios
     .post(`${BASE_URL}/user/login`, { email, password })

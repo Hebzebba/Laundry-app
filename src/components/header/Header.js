@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./Header.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -16,6 +16,12 @@ const Header = () => {
   const openNav = () => (toggleNavRef.current.style.width = "200px");
   const closeNav = () => (toggleNavRef.current.style.width = 0);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document
+      .getElementById("root-sub-container")
+      .addEventListener("click", closeNav);
+  }, []);
 
   const handleLogout = () => {
     localStorage.clear();

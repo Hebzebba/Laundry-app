@@ -33,8 +33,18 @@ const userInfoReducer = (
       return state;
   }
 };
+
+const cordinateReducer = (state = {}, { type, payload }) => {
+  switch (type) {
+    case ActionTypes.CORDINATE:
+      return { ...state, ...payload };
+    default:
+      return state;
+  }
+};
 export const allReducers = combineReducers({
   auth,
   loadingReducer,
   userInfoReducer,
+  cordinateReducer,
 });

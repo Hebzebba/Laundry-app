@@ -27,7 +27,7 @@ function App() {
         <div className="header">
           <Header />
         </div>
-        <div>
+        <div id="root-sub-container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/laundry" element={<Laundry />} />

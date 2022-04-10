@@ -24,6 +24,7 @@ const DetailsPage = () => {
   const alert = useAlert();
 
   const load = useSelector((state) => state.loadingReducer);
+  const cordinate = useSelector((state) => state.cordinateReducer);
 
   const [fName, setFname] = useState(localStorage.getItem("user_name"));
   const [phone, setPhone] = useState(localStorage.getItem("contact"));
@@ -63,8 +64,8 @@ const DetailsPage = () => {
         <div className="details-map">
           <Map
             initialViewState={{
-              longitude: -0.48889160156250006,
-              latitude: 6.343961848265028,
+              longitude: cordinate.longitude || localStorage.getItem("long"),
+              latitude: cordinate.latitude || localStorage.getItem("lat"),
               zoom: 9,
             }}
             style={{
@@ -76,8 +77,8 @@ const DetailsPage = () => {
             mapboxAccessToken="pk.eyJ1Ijoic2V0aGdyZWdvcnkiLCJhIjoiY2wweHZ0d29uMGp0ZzNtc2R5bGFidHVoeCJ9.YT86gZa8hPmJ_XaC44qpNQ"
           >
             <Marker
-              longitude={-0.48889160156250006}
-              latitude={6.343961848265028}
+              longitude={cordinate.longitude || localStorage.getItem("long")}
+              latitude={cordinate.latitude || localStorage.getItem("lat")}
               anchor="bottom"
             >
               <IoLocationSharp size={25} />
@@ -114,7 +115,7 @@ const DetailsPage = () => {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="email">Laundry type</label>
+              <label htmlFor="laundry_type">Laundry type</label>
               <div className="input-form">
                 <select
                   name="laundry_type"
