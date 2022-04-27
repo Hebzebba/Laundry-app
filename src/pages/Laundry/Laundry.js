@@ -5,7 +5,8 @@ const Laundry = () => {
   return (
     <div className="laundry-container">
       <small style={{ fontWeight: "bold" }}>
-        Find near by location and click on marker for more details and booking
+        Find near by location and click on marker for more details and booking.
+        The human icon represent current position
       </small>
       <MapBox />
     </div>

@@ -1,13 +1,30 @@
 import "./Map.css";
 import { IoLocationSharp } from "react-icons/io5";
-import Map, { Marker } from "react-map-gl";
+import Map, { Marker, Popup } from "react-map-gl";
 
 import "./Map.css";
 import { map_cordinate } from "./map_data";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCordinate } from "../../actions/Action";
+import { useEffect, useState } from "react";
+import { FcBusinessman } from "react-icons/fc";
+
 const MapBox = () => {
+  const [longi, setLong] = useState();
+  const [lati, setLat] = useState();
+  const [popUpData, setPopUpData] = useState();
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        setLong(
+          position.coords.longitude !== NaN ? position.coords.longitude : 0
+        );
+        setLat(position.coords.latitude !== NaN ? position.coords.latitude : 0);
+      });
+    }
+  }, [lati]);
   const authStatus = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,6 +42,16 @@ const MapBox = () => {
       navigate("/login", { replace: true });
     }
   };
+  const onHoverMarker = (event, id) => {
+    if (event.type === "mouseenter") {
+      let result = map_cordinate.features.filter((item) => item._id === id);
+      setPopUpData(result);
+    }
+  };
+
+  const onMouseLeave = () => {
+    setPopUpData(null);
+  };
   return (
     <div>
       <Map
@@ -39,19 +66,44 @@ const MapBox = () => {
           color: "red",
         }}
         mapStyle="mapbox://styles/mapbox/streets-v9"
-        mapboxAccessToken="pk.eyJ1Ijoic2V0aGdyZWdvcnkiLCJhIjoiY2wweHZ0d29uMGp0ZzNtc2R5bGFidHVoeCJ9.YT86gZa8hPmJ_XaC44qpNQ"
+        mapboxAccessToken={process.env.REACT_APP_MAP_KEY}
       >
-        {map_cordinate.features.map((data, key) => (
-          <Marker
-            key={key}
-            longitude={data.longitude}
-            latitude={data.latitude}
-            anchor="bottom"
-            onClick={() => viewAndMakeOrder(data.longitude, data.latitude)}
+        {map_cordinate.features.map((data) => (
+          <div
+            key={data._id}
+            className="marker-container"
+            onMouseEnter={(e) => onHoverMarker(e, data._id)}
+            onMouseLeave={onMouseLeave}
           >
-            <IoLocationSharp style={{ cursor: "pointer" }} size={25} />
-          </Marker>
+            <Marker
+              longitude={data.longitude}
+              latitude={data.latitude}
+              anchor="bottom"
+              onClick={() => viewAndMakeOrder(data.longitude, data.latitude)}
+            >
+              <IoLocationSharp style={{ cursor: "pointer" }} size={25} />
+            </Marker>
+          </div>
         ))}
+        {popUpData && (
+          <Popup
+            longitude={popUpData[0].longitude}
+            latitude={popUpData[0].latitude}
+            anchor="top"
+            className="popup"
+            closeButton={false}
+          >
+            {popUpData[0].name}
+          </Popup>
+        )}
+
+        {/* <Marker
+          longitude={longi !== NaN ? longi : 0}
+          latitude={lati !== NaN ? lati : 0}
+          anchor="bottom"
+        >
+          <FcBusinessman style={{ cursor: "pointer" }} size={25} />
+        </Marker> */}
       </Map>
     </div>
   );
