@@ -11,20 +11,22 @@ import { useEffect, useState } from "react";
 import { FcBusinessman } from "react-icons/fc";
 
 const MapBox = () => {
-  const [longi, setLong] = useState();
-  const [lati, setLat] = useState();
   const [popUpData, setPopUpData] = useState();
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        setLong(
+        localStorage.setItem(
+          "user_pos_x",
           position.coords.longitude !== NaN ? position.coords.longitude : 0
         );
-        setLat(position.coords.latitude !== NaN ? position.coords.latitude : 0);
+        localStorage.setItem(
+          "user_pos_y",
+          position.coords.latitude !== NaN ? position.coords.latitude : 0
+        );
       });
     }
-  }, [lati]);
+  }, []);
   const authStatus = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -97,13 +99,13 @@ const MapBox = () => {
           </Popup>
         )}
 
-        {/* <Marker
-          longitude={longi !== NaN ? longi : 0}
-          latitude={lati !== NaN ? lati : 0}
+        <Marker
+          longitude={localStorage.getItem("user_pos_x")}
+          latitude={localStorage.getItem("user_pos_y")}
           anchor="bottom"
         >
           <FcBusinessman style={{ cursor: "pointer" }} size={25} />
-        </Marker> */}
+        </Marker>
       </Map>
     </div>
   );

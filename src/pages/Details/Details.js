@@ -38,7 +38,7 @@ const DetailsPage = () => {
   if (dd < 10) dd = "0" + dd;
   if (mm < 10) mm = "0" + mm;
 
-  const today = mm + "-" + dd + "-" + yyyy;
+  const today = yyyy + "-" + mm + "-" + dd;
   const [startDate, setStartDate] = useState(today);
 
   const handleSubmit = async (e) => {
@@ -98,6 +98,7 @@ const DetailsPage = () => {
                   required={true}
                   value={fName}
                   disabled
+                  className="disable-hover-effect"
                 />
               </div>
             </div>
@@ -105,6 +106,7 @@ const DetailsPage = () => {
               <label htmlFor="contact">Contact</label>
               <div className="input-form">
                 <PhoneInput
+                  id="contact"
                   country={"gh"}
                   value={phone}
                   inputStyle={{ width: "100%" }}
@@ -135,6 +137,7 @@ const DetailsPage = () => {
               <label htmlFor="pickUpDate">Pick up date</label>
               <div className="input-form">
                 <input
+                  id="pickUpDate"
                   type="date"
                   value={startDate}
                   onChange={(event) => setStartDate(event.target.value)}
@@ -147,6 +150,7 @@ const DetailsPage = () => {
                 <span style={{ padding: "20px" }}> Make a booking</span>
                 <IoBookSharp size={24} />
               </button>
+              <small>#Note: Pay on delivery</small>
               <div className="loader">
                 <ScaleLoader
                   color={"#03e3fc"}
