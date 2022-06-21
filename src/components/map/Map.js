@@ -30,7 +30,6 @@ const MapBox = () => {
   const authStatus = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const viewAndMakeOrder = (longitude, latitude) => {
     if (
       authStatus ||
@@ -67,8 +66,8 @@ const MapBox = () => {
           height: "80vh",
           color: "red",
         }}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
         mapboxAccessToken={process.env.REACT_APP_MAP_KEY}
+        mapStyle="mapbox://styles/mapbox/streets-v9"
       >
         {map_cordinate.features.map((data) => (
           <div

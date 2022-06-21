@@ -11,6 +11,7 @@ import "react-phone-input-2/lib/style.css";
 
 import "./Details.css";
 import { createOrder, loading, end_loading } from "../../actions/Action";
+import { sendEmail } from "../../components/emailjs/Notification";
 
 const override = css`
   display: block;
@@ -54,6 +55,12 @@ const DetailsPage = () => {
     if (response[0] === "Order booked") {
       dispatch(end_loading());
       alert.success("Booking successful");
+      let message = `This the details of your order
+      ====
+      type || ${laundry}
+      ====
+      `;
+      sendEmail(fName, localStorage.getItem("email"), message);
     }
   };
 
@@ -74,7 +81,7 @@ const DetailsPage = () => {
               color: "red",
             }}
             mapStyle="mapbox://styles/mapbox/streets-v9"
-            mapboxAccessToken="pk.eyJ1Ijoic2V0aGdyZWdvcnkiLCJhIjoiY2wweHZ0d29uMGp0ZzNtc2R5bGFidHVoeCJ9.YT86gZa8hPmJ_XaC44qpNQ"
+            mapboxAccessToken={process.env.REACT_APP_MAP_KEY}
           >
             <Marker
               longitude={cordinate.longitude || localStorage.getItem("long")}

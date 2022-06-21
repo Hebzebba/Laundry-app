@@ -9,6 +9,7 @@ import Login from "./pages/Login/Login";
 import SignUp from "./pages/CreacteAccount/SignUp";
 import DetailsPage from "./pages/Details/Details";
 import RequireAuth from "./components/auth/RequireAuth";
+import "mapbox-gl/dist/mapbox-gl.css";
 
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
