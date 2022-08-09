@@ -9,9 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCordinate } from "../../actions/Action";
 import { useEffect, useState } from "react";
 import { FcBusinessman } from "react-icons/fc";
+import axios from "axios";
 
 const MapBox = () => {
   const [popUpData, setPopUpData] = useState();
+  const [laundry_info, setLaundryInfo] = useState();
+  const BASE_URL = "http://localhost:8080/api";
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -26,6 +29,13 @@ const MapBox = () => {
         );
       });
     }
+
+    axios
+      .get(`${BASE_URL}/laundry-info`)
+      .then((res) => {
+        setLaundryInfo(res.data);
+      })
+      .catch((error) => error);
   }, []);
   const authStatus = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -45,7 +55,7 @@ const MapBox = () => {
   };
   const onHoverMarker = (event, id) => {
     if (event.type === "mouseenter") {
-      let result = map_cordinate.features.filter((item) => item._id === id);
+      let result = laundry_info.filter((item) => item.longitude === id);
       setPopUpData(result);
     }
   };
@@ -69,23 +79,24 @@ const MapBox = () => {
         mapboxAccessToken={process.env.REACT_APP_MAP_KEY}
         mapStyle="mapbox://styles/mapbox/streets-v9"
       >
-        {map_cordinate.features.map((data) => (
-          <div
-            key={data._id}
-            className="marker-container"
-            onMouseEnter={(e) => onHoverMarker(e, data._id)}
-            onMouseLeave={onMouseLeave}
-          >
-            <Marker
-              longitude={data.longitude}
-              latitude={data.latitude}
-              anchor="bottom"
-              onClick={() => viewAndMakeOrder(data.longitude, data.latitude)}
+        {laundry_info &&
+          laundry_info.map((data, key) => (
+            <div
+              key={key}
+              className="marker-container"
+              onMouseEnter={(e) => onHoverMarker(e, data.longitude)}
+              onMouseLeave={onMouseLeave}
             >
-              <IoLocationSharp style={{ cursor: "pointer" }} size={25} />
-            </Marker>
-          </div>
-        ))}
+              <Marker
+                longitude={data.longitude}
+                latitude={data.latitude}
+                anchor="bottom"
+                onClick={() => viewAndMakeOrder(data.longitude, data.latitude)}
+              >
+                <IoLocationSharp style={{ cursor: "pointer" }} size={25} />
+              </Marker>
+            </div>
+          ))}
         {popUpData && (
           <Popup
             longitude={popUpData[0].longitude}
@@ -94,7 +105,10 @@ const MapBox = () => {
             className="popup"
             closeButton={false}
           >
-            {popUpData[0].name}
+            <center>
+              <p>{popUpData[0].laundryName}</p>
+              <small>{popUpData[0].info}</small>
+            </center>
           </Popup>
         )}
 
