@@ -3,7 +3,6 @@ import { IoLocationSharp } from "react-icons/io5";
 import Map, { Marker, Popup } from "react-map-gl";
 
 import "./Map.css";
-import { map_cordinate } from "./map_data";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCordinate } from "../../actions/Action";
@@ -14,7 +13,10 @@ import axios from "axios";
 const MapBox = () => {
   const [popUpData, setPopUpData] = useState();
   const [laundry_info, setLaundryInfo] = useState();
-  const BASE_URL = "http://localhost:8080/api";
+  // Dev
+  // const BASE_URL = "http://localhost:8080/api";
+  // Prod
+  const BASE_URL = "https://labmass.herokuapp.com/api";
 
   useEffect(() => {
     if (navigator.geolocation) {
